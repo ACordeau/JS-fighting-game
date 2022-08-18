@@ -1,13 +1,17 @@
 // TODO ADD CONTROLLER SUPPORT
 // TODO Tweak Movement
-// TODO FIX LEAVING EDGE OF SCREEN'
-// TODO FIX INIFINITE JUMPING
+// DONE FIX LEAVING EDGE OF SCREEN
+// IN PROGRESS FIX INIFINITE JUMPING
 // TODO ADD DOUBLE JUMP
 // TODO ADD BLOCKING
 // TODO ADD MORE THAN ONE ATTACK
 // TODO ADD CROUCH - NO CROUCHING SPRITES ;n;
 // TODO FLIP SPRITES
 // TODO ALLOW PLAYERS TO JUMP ON SHOP
+// TODO REFACTOR
+// TODO COMMENT EVERYTHING
+// TODO ADD HOME PAGE
+// TODO ADD CHARACTER SELECT
 
 // Select the canvas and window context
 const canvas = document.querySelector("canvas");
@@ -23,6 +27,7 @@ canvas.height = 576;
 context.fillRect(0, 0, canvas.width, canvas.height);
 
 const gravity = 0.7;
+const ground = 330;
 let timer = 60;
 let timerId;
 
@@ -82,11 +87,14 @@ function animate() {
   enemy.velocity.x = 0;
 
   // Player movement
-
-  if (keys.a.pressed && player.lastKey === "a") {
+  if (keys.a.pressed && player.lastKey === "a" && player.position.x >= 0) {
     player.velocity.x = -5;
     player.switchSprite("run");
-  } else if (keys.d.pressed && player.lastKey === "d") {
+  } else if (
+    keys.d.pressed &&
+    player.lastKey === "d" &&
+    player.position.x + player.width <= canvas.width
+  ) {
     player.velocity.x = 5;
     player.switchSprite("run");
   } else {
@@ -101,10 +109,18 @@ function animate() {
   }
 
   // Enemy movement
-  if (keys.ArrowLeft.pressed && enemy.lastKey === "ArrowLeft") {
+  if (
+    keys.ArrowLeft.pressed &&
+    enemy.lastKey === "ArrowLeft" &&
+    enemy.position.x >= 0
+  ) {
     enemy.velocity.x = -5;
     enemy.switchSprite("run");
-  } else if (keys.ArrowRight.pressed && enemy.lastKey === "ArrowRight") {
+  } else if (
+    keys.ArrowRight.pressed &&
+    enemy.lastKey === "ArrowRight" &&
+    enemy.position.x + enemy.width <= canvas.width
+  ) {
     enemy.switchSprite("run");
     enemy.velocity.x = 5;
   } else {

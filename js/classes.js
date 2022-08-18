@@ -155,7 +155,7 @@ class Fighter extends Sprite {
     // If the y position of the Sprite is greater than the value of the bottom of the canvas, set velocity = 0; Otherwise, gravity is continually applied.
     if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
       this.velocity.y = 0;
-      this.position.y = 330;
+      this.position.y = ground;
     } else {
       // If jumping, gravity is normal, then when falling starts to compound
       if (this.velocity.y > 0) {
@@ -165,6 +165,8 @@ class Fighter extends Sprite {
       }
     }
   }
+
+  jump() {}
 
   attack() {
     this.switchSprite("attack1");
