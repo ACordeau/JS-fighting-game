@@ -1,7 +1,7 @@
 // TODO ADD CONTROLLER SUPPORT
 // TODO Tweak Movement
 // DONE FIX LEAVING EDGE OF SCREEN
-// IN PROGRESS FIX INIFINITE JUMPING
+// DONE FIX INIFINITE JUMPING
 // TODO ADD DOUBLE JUMP
 // TODO ADD BLOCKING
 // TODO ADD MORE THAN ONE ATTACK
@@ -101,11 +101,10 @@ function animate() {
     player.switchSprite("idle");
   }
 
-  // Jumping
-  if (player.velocity.y < 0) {
-    player.switchSprite("jump");
-  } else if (player.velocity.y > 0) {
-    player.switchSprite("fall");
+  if (player.velocity.y != 0) {
+    player.jump();
+  } else {
+    player.isJumping = false;
   }
 
   // Enemy movement
@@ -128,10 +127,10 @@ function animate() {
   }
 
   // Jumping
-  if (enemy.velocity.y < 0) {
-    enemy.switchSprite("jump");
-  } else if (enemy.velocity.y > 0) {
-    enemy.switchSprite("fall");
+  if (enemy.velocity.y != 0) {
+    enemy.jump();
+  } else {
+    enemy.isJumping = false;
   }
 
   // detect for collision Player to Enemy
@@ -192,7 +191,9 @@ window.addEventListener("keydown", (event) => {
         player.lastKey = "a";
         break;
       case "w":
-        player.velocity.y = -20;
+        if (!player.isJumping) {
+          player.velocity.y = -20;
+        }
         break;
       case " ":
         player.attack();
@@ -212,7 +213,9 @@ window.addEventListener("keydown", (event) => {
         enemy.lastKey = "ArrowLeft";
         break;
       case "ArrowUp":
-        enemy.velocity.y = -20;
+        if (!enemy.isJumping) {
+          enemy.velocity.y = -20;
+        }
         break;
       case "Control":
         enemy.attack();

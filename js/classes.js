@@ -113,6 +113,7 @@ class Fighter extends Sprite {
       height: attackBox.height,
     };
     this.isAttacking;
+    this.isJumping;
     this.health = 100;
     this.framesCurrent = 0;
     this.framesElapsed = 0;
@@ -166,7 +167,14 @@ class Fighter extends Sprite {
     }
   }
 
-  jump() {}
+  jump() {
+    this.isJumping = true;
+    if (this.velocity.y < 0) {
+      this.switchSprite("jump");
+    } else if (this.velocity.y > 0) {
+      this.switchSprite("fall");
+    }
+  }
 
   attack() {
     this.switchSprite("attack1");
