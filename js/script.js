@@ -6,12 +6,15 @@
 // TODO ADD BLOCKING
 // TODO ADD MORE THAN ONE ATTACK
 // TODO ADD CROUCH - NO CROUCHING SPRITES ;n;
-// TODO FLIP SPRITES
+// DONE FLIP SPRITES
+// IN PROGRESS FLIP ATTACK BOX
 // TODO ALLOW PLAYERS TO JUMP ON SHOP
 // TODO REFACTOR
 // TODO COMMENT EVERYTHING
 // TODO ADD HOME PAGE
 // TODO ADD CHARACTER SELECT
+// TODO ABSTRACT FRAMES HOLD FROM SPRITES
+// TODO STOP CHARACTERS FROM ACTING DURING DEATH ANIMATION
 
 // Select the canvas and window context
 const canvas = document.querySelector("canvas");
@@ -89,16 +92,20 @@ function animate() {
   // Player movement
   if (keys.a.pressed && player.lastKey === "a" && player.position.x >= 0) {
     player.velocity.x = -5;
-    player.switchSprite("run");
+    player.switchSprite("runLeft");
   } else if (
     keys.d.pressed &&
     player.lastKey === "d" &&
     player.position.x + player.width <= canvas.width
   ) {
     player.velocity.x = 5;
-    player.switchSprite("run");
+    player.switchSprite("runRight");
   } else {
-    player.switchSprite("idle");
+    if (player.lastKey === "a") {
+      player.switchSprite("idleLeft");
+    } else {
+      player.switchSprite("idleRight");
+    }
   }
 
   if (player.velocity.y != 0) {
@@ -114,16 +121,20 @@ function animate() {
     enemy.position.x >= 0
   ) {
     enemy.velocity.x = -5;
-    enemy.switchSprite("run");
+    enemy.switchSprite("runLeft");
   } else if (
     keys.ArrowRight.pressed &&
     enemy.lastKey === "ArrowRight" &&
     enemy.position.x + enemy.width <= canvas.width
   ) {
-    enemy.switchSprite("run");
+    enemy.switchSprite("runRight");
     enemy.velocity.x = 5;
   } else {
-    enemy.switchSprite("idle");
+    if (enemy.lastKey === "ArrowLeft") {
+      enemy.switchSprite("idleLeft");
+    } else {
+      enemy.switchSprite("idleRight");
+    }
   }
 
   // Jumping

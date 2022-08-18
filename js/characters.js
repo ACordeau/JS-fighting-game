@@ -12,7 +12,7 @@ const player = new Fighter({
     x: 0,
     y: 0,
   },
-  imageSrc: "./assets/samuraiMack/idle.png",
+  imageSrc: "./assets/samuraiMack/idle Right.png",
   framesHold: 10,
   framesMax: 8,
   scale: 2.5,
@@ -21,32 +21,60 @@ const player = new Fighter({
     y: 157,
   },
   sprites: {
-    idle: {
-      imageSrc: "./assets/samuraiMack/Idle.png",
+    idleRight: {
+      imageSrc: "./assets/samuraiMack/Idle Right.png",
       framesMax: 8,
     },
-    run: {
-      imageSrc: "./assets/samuraiMack/Run.png",
+    idleLeft: {
+      imageSrc: "./assets/samuraiMack/Idle Left.png",
       framesMax: 8,
     },
-    jump: {
-      imageSrc: "./assets/samuraiMack/Jump.png",
+    runRight: {
+      imageSrc: "./assets/samuraiMack/Run Right.png",
+      framesMax: 8,
+    },
+    runLeft: {
+      imageSrc: "./assets/samuraiMack/Run Left.png",
+      framesMax: 8,
+    },
+    jumpRight: {
+      imageSrc: "./assets/samuraiMack/Jump Right.png",
       framesMax: 2,
     },
-    fall: {
-      imageSrc: "./assets/samuraiMack/Fall.png",
+    jumpLeft: {
+      imageSrc: "./assets/samuraiMack/Jump Left.png",
       framesMax: 2,
     },
-    attack1: {
-      imageSrc: "./assets/samuraiMack/Attack1.png",
+    fallRight: {
+      imageSrc: "./assets/samuraiMack/Fall Right.png",
+      framesMax: 2,
+    },
+    fallLeft: {
+      imageSrc: "./assets/samuraiMack/Fall Left.png",
+      framesMax: 2,
+    },
+    attack1Right: {
+      imageSrc: "./assets/samuraiMack/Attack1 Right.png",
       framesMax: 6,
     },
-    takeHit: {
-      imageSrc: "./assets/samuraiMack/Take Hit.png",
+    attack1Left: {
+      imageSrc: "./assets/samuraiMack/Attack1 Left.png",
+      framesMax: 6,
+    },
+    takeHitRight: {
+      imageSrc: "./assets/samuraiMack/Take Hit Right.png",
       framesMax: 4,
     },
-    death: {
-      imageSrc: "./assets/samuraiMack/Death.png",
+    takeHitLeft: {
+      imageSrc: "./assets/samuraiMack/Take Hit Left.png",
+      framesMax: 4,
+    },
+    deathRight: {
+      imageSrc: "./assets/samuraiMack/Death Right.png",
+      framesMax: 6,
+    },
+    deathLeft: {
+      imageSrc: "./assets/samuraiMack/Death Left.png",
       framesMax: 6,
     },
   },
@@ -73,8 +101,9 @@ const enemy = new Fighter({
     x: -50,
     y: 0,
   },
+  lastKey: "ArrowLeft",
   color: "blue",
-  imageSrc: "./assets/kenji/idle.png",
+  imageSrc: "./assets/kenji/Idle Left.png",
   framesHold: 10,
   framesMax: 4,
   scale: 2.5,
@@ -83,32 +112,60 @@ const enemy = new Fighter({
     y: 167,
   },
   sprites: {
-    idle: {
-      imageSrc: "./assets/kenji/Idle.png",
+    idleRight: {
+      imageSrc: "./assets/kenji/Idle Right.png",
       framesMax: 4,
     },
-    run: {
-      imageSrc: "./assets/kenji/Run.png",
+    idleLeft: {
+      imageSrc: "./assets/kenji/Idle Left.png",
+      framesMax: 4,
+    },
+    runRight: {
+      imageSrc: "./assets/kenji/Run Right.png",
       framesMax: 8,
     },
-    jump: {
-      imageSrc: "./assets/kenji/Jump.png",
+    runLeft: {
+      imageSrc: "./assets/kenji/Run Left.png",
+      framesMax: 8,
+    },
+    jumpRight: {
+      imageSrc: "./assets/kenji/Jump Right.png",
       framesMax: 2,
     },
-    fall: {
-      imageSrc: "./assets/kenji/Fall.png",
+    jumpLeft: {
+      imageSrc: "./assets/kenji/Jump Left.png",
       framesMax: 2,
     },
-    attack1: {
-      imageSrc: "./assets/kenji/Attack1.png",
+    fallRight: {
+      imageSrc: "./assets/kenji/Fall Right.png",
+      framesMax: 2,
+    },
+    fallLeft: {
+      imageSrc: "./assets/kenji/Fall Left.png",
+      framesMax: 2,
+    },
+    attack1Right: {
+      imageSrc: "./assets/kenji/Attack1 Right.png",
       framesMax: 4,
     },
-    takeHit: {
-      imageSrc: "./assets/kenji/Take hit.png",
-      framesMax: 3,
+    attack1Left: {
+      imageSrc: "./assets/kenji/Attack1 Left.png",
+      framesMax: 4,
     },
-    death: {
-      imageSrc: "./assets/kenji/Death.png",
+    takeHitRight: {
+      imageSrc: "./assets/kenji/Take Hit Right.png",
+      framesMax: 4,
+    },
+    takeHitLeft: {
+      imageSrc: "./assets/kenji/Take Hit Left.png",
+      framesMax: 4,
+    },
+    deathRight: {
+      imageSrc: "./assets/kenji/Death Right.png",
+      framesMax: 7,
+    },
+    deathLeft: {
+      imageSrc: "./assets/kenji/Death Left.png",
       framesMax: 7,
     },
   },

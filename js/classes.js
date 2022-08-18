@@ -88,6 +88,7 @@ class Fighter extends Sprite {
     offset = { x: 0, y: 0 },
     sprites,
     attackBox = { offset: {}, width: undefined, height: undefined },
+    lastKey,
   }) {
     super({
       position,
@@ -101,7 +102,7 @@ class Fighter extends Sprite {
     this.velocity = velocity;
     this.height = 150;
     this.width = 50;
-    this.lastKey;
+    this.lastKey = lastKey;
     this.color = color;
     this.attackBox = {
       position: {
@@ -141,13 +142,13 @@ class Fighter extends Sprite {
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
 
     // Draw attack box
-
-    // context.fillRect(
-    //   this.attackBox.position.x,
-    //   this.attackBox.position.y,
-    //   this.attackBox.width,
-    //   this.attackBox.height
-    // );
+    context.fillStyle = "Black";
+    context.fillRect(
+      this.attackBox.position.x,
+      this.attackBox.position.y,
+      this.attackBox.width,
+      this.attackBox.height
+    );
 
     // Updates the y position
     this.position.x += this.velocity.x;
@@ -170,14 +171,26 @@ class Fighter extends Sprite {
   jump() {
     this.isJumping = true;
     if (this.velocity.y < 0) {
-      this.switchSprite("jump");
+      if (this.lastKey === "a" || this.lastKey === "ArrowLeft") {
+        this.switchSprite("jumpLeft");
+      } else {
+        this.switchSprite("jumpRight");
+      }
     } else if (this.velocity.y > 0) {
-      this.switchSprite("fall");
+      if (this.lastKey === "a" || this.lastKey === "ArrowLeft") {
+        this.switchSprite("fallLeft");
+      } else {
+        this.switchSprite("fallRight");
+      }
     }
   }
 
   attack() {
-    this.switchSprite("attack1");
+    if (this.lastKey === "a" || this.lastKey === "ArrowLeft") {
+      this.switchSprite("attack1Left");
+    } else {
+      this.switchSprite("attack1Right");
+    }
     this.isAttacking = true;
   }
 
@@ -185,16 +198,30 @@ class Fighter extends Sprite {
     this.health -= 20;
 
     if (this.health <= 0) {
-      this.switchSprite("death");
+      if (this.lastKey === "a" || this.lastKey === "ArrowLeft") {
+        this.switchSprite("deathLeft");
+      } else {
+        this.switchSprite("deathRight");
+      }
     } else {
-      this.switchSprite("takeHit");
+      if (this.lastKey === "a" || this.lastKey === "ArrowLeft") {
+        this.switchSprite("takeHitLeft");
+      } else {
+        this.switchSprite("takeHitRight");
+      }
     }
   }
 
   switchSprite(sprite) {
     // overriding when fighter dies
-    if (this.image === this.sprites.death.image) {
-      if (this.framesCurrent === this.sprites.death.framesMax - 1) {
+    if (
+      this.image === this.sprites.deathLeft.image ||
+      this.image === this.sprites.deathRight.image
+    ) {
+      if (
+        this.framesCurrent === this.sprites.deathRight.framesMax - 1 ||
+        this.framesCurrent === this.sprites.deathLeft.framesMax - 1
+      ) {
         this.dead = true;
       }
       return;
@@ -202,67 +229,120 @@ class Fighter extends Sprite {
 
     // overriding all other animations with attack
     if (
-      this.image === this.sprites.attack1.image &&
-      this.framesCurrent < this.sprites.attack1.framesMax - 1
+      (this.image === this.sprites.attack1Right.image &&
+        this.framesCurrent < this.sprites.attack1Right.framesMax - 1) ||
+      (this.image === this.sprites.attack1Left.image &&
+        this.framesCurrent < this.sprites.attack1Left.framesMax - 1)
     ) {
       return;
     }
 
     // overriding when fighter gets hit
     if (
-      this.image === this.sprites.takeHit.image &&
-      this.framesCurrent < this.sprites.takeHit.framesMax - 1
+      (this.image === this.sprites.takeHitRight.image &&
+        this.framesCurrent < this.sprites.takeHitRight.framesMax - 1) ||
+      (this.image === this.sprites.takeHitLeft.image &&
+        this.framesCurrent < this.sprites.takeHitLeft.framesMax - 1)
     ) {
       return;
     }
 
     switch (sprite) {
-      case "idle":
-        if (this.image !== this.sprites.idle.image) {
-          this.image = this.sprites.idle.image;
-          this.framesMax = this.sprites.idle.framesMax;
+      case "idleRight":
+        if (this.image !== this.sprites.idleRight.image) {
+          this.image = this.sprites.idleRight.image;
+          this.framesMax = this.sprites.idleRight.framesMax;
           this.framesCurrent = 0;
         }
         break;
-      case "run":
-        if (this.image !== this.sprites.run.image) {
-          this.image = this.sprites.run.image;
-          this.framesMax = this.sprites.run.framesMax;
+      case "idleLeft":
+        if (this.image !== this.sprites.idleLeft.image) {
+          this.image = this.sprites.idleLeft.image;
+          this.framesMax = this.sprites.idleLeft.framesMax;
           this.framesCurrent = 0;
         }
         break;
-      case "jump":
-        if (this.image !== this.sprites.jump.image) {
-          this.image = this.sprites.jump.image;
-          this.framesMax = this.sprites.jump.framesMax;
+      case "runRight":
+        if (this.image !== this.sprites.runRight.image) {
+          this.image = this.sprites.runRight.image;
+          this.framesMax = this.sprites.runRight.framesMax;
           this.framesCurrent = 0;
         }
         break;
-      case "fall":
-        if (this.image !== this.sprites.fall.image) {
-          this.image = this.sprites.fall.image;
-          this.framesMax = this.sprites.fall.framesMax;
+      case "runLeft":
+        if (this.image !== this.sprites.runLeft.image) {
+          this.image = this.sprites.runLeft.image;
+          this.framesMax = this.sprites.runLeft.framesMax;
           this.framesCurrent = 0;
         }
         break;
-      case "attack1":
-        if (this.image !== this.sprites.attack1.image) {
-          this.image = this.sprites.attack1.image;
-          this.framesMax = this.sprites.attack1.framesMax;
+      case "jumpRight":
+        if (this.image !== this.sprites.jumpRight.image) {
+          this.image = this.sprites.jumpRight.image;
+          this.framesMax = this.sprites.jumpRight.framesMax;
           this.framesCurrent = 0;
         }
         break;
-      case "takeHit":
-        if (this.image !== this.sprites.takeHit.image) {
-          this.image = this.sprites.takeHit.image;
-          this.framesMax = this.sprites.takeHit.framesMax;
+      case "jumpLeft":
+        if (this.image !== this.sprites.jumpLeft.image) {
+          this.image = this.sprites.jumpLeft.image;
+          this.framesMax = this.sprites.jumpLeft.framesMax;
           this.framesCurrent = 0;
         }
         break;
-      case "death":
-        if (this.image !== this.sprites.death.image) {
-          this.image = this.sprites.death.image;
-          this.framesMax = this.sprites.death.framesMax;
+      case "fallRight":
+        if (this.image !== this.sprites.fallRight.image) {
+          this.image = this.sprites.fallRight.image;
+          this.framesMax = this.sprites.fallRight.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
+      case "fallLeft":
+        if (this.image !== this.sprites.fallLeft.image) {
+          this.image = this.sprites.fallLeft.image;
+          this.framesMax = this.sprites.fallLeft.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
+      case "attack1Right":
+        if (this.image !== this.sprites.attack1Right.image) {
+          this.image = this.sprites.attack1Right.image;
+          this.framesMax = this.sprites.attack1Right.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
+      case "attack1Left":
+        if (this.image !== this.sprites.attack1Left.image) {
+          this.image = this.sprites.attack1Left.image;
+          this.framesMax = this.sprites.attack1Left.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
+      case "takeHitRight":
+        if (this.image !== this.sprites.takeHitRight.image) {
+          this.image = this.sprites.takeHitRight.image;
+          this.framesMax = this.sprites.takeHitRight.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
+      case "takeHitLeft":
+        if (this.image !== this.sprites.takeHitLeft.image) {
+          this.image = this.sprites.takeHitLeft.image;
+          this.framesMax = this.sprites.takeHitLeft.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
+      case "deathRight":
+        if (this.image !== this.sprites.deathRight.image) {
+          this.image = this.sprites.deathRight.image;
+          this.framesMax = this.sprites.deathRight.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
+      case "deathLeft":
+        if (this.image !== this.sprites.deathLeft.image) {
+          this.image = this.sprites.deathLeft.image;
+          this.framesMax = this.sprites.deathLeft.framesMax;
           this.framesCurrent = 0;
         }
         break;
