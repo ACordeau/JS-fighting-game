@@ -87,7 +87,12 @@ class Fighter extends Sprite {
     framesHold = 10,
     offset = { x: 0, y: 0 },
     sprites,
-    attackBox = { offset: {}, width: undefined, height: undefined },
+    attackBox = {
+      offsetRight: {},
+      offsetLeft: {},
+      width: undefined,
+      height: undefined,
+    },
     lastKey,
   }) {
     super({
@@ -109,7 +114,8 @@ class Fighter extends Sprite {
         x: this.position.x,
         y: this.position.y,
       },
-      offset: attackBox.offset,
+      offsetRight: attackBox.offsetRight,
+      offsetLeft: attackBox.offsetLeft,
       width: attackBox.width,
       height: attackBox.height,
     };
@@ -138,17 +144,28 @@ class Fighter extends Sprite {
     }
 
     // attack boxes
-    this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
-    this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
+    if (!this.isAttacking) {
+      if (this.lastKey === "a" || this.lastKey === "ArrowLeft") {
+        this.attackBox.position.x =
+          this.position.x + this.attackBox.offsetLeft.x;
+        this.attackBox.position.y =
+          this.position.y + this.attackBox.offsetLeft.y;
+      } else {
+        this.attackBox.position.x =
+          this.position.x + this.attackBox.offsetRight.x;
+        this.attackBox.position.y =
+          this.position.y + this.attackBox.offsetRight.y;
+      }
+    }
 
     // Draw attack box
-    context.fillStyle = "Black";
-    context.fillRect(
-      this.attackBox.position.x,
-      this.attackBox.position.y,
-      this.attackBox.width,
-      this.attackBox.height
-    );
+    // context.fillStyle = "Black";
+    // context.fillRect(
+    //   this.attackBox.position.x,
+    //   this.attackBox.position.y,
+    //   this.attackBox.width,
+    //   this.attackBox.height
+    // );
 
     // Updates the y position
     this.position.x += this.velocity.x;

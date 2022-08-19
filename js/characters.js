@@ -79,8 +79,12 @@ const player = new Fighter({
     },
   },
   attackBox: {
-    offset: {
+    offsetRight: {
       x: 100,
+      y: 50,
+    },
+    offsetLeft: {
+      x: -180,
       y: 50,
     },
     width: 150,
@@ -154,11 +158,11 @@ const enemy = new Fighter({
     },
     takeHitRight: {
       imageSrc: "./assets/kenji/Take Hit Right.png",
-      framesMax: 4,
+      framesMax: 3,
     },
     takeHitLeft: {
       imageSrc: "./assets/kenji/Take Hit Left.png",
-      framesMax: 4,
+      framesMax: 3,
     },
     deathRight: {
       imageSrc: "./assets/kenji/Death Right.png",
@@ -170,8 +174,12 @@ const enemy = new Fighter({
     },
   },
   attackBox: {
-    offset: {
+    offsetLeft: {
       x: -171,
+      y: 50,
+    },
+    offsetRight: {
+      x: 70,
       y: 50,
     },
     width: 171,
