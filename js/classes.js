@@ -81,7 +81,6 @@ class Fighter extends Sprite {
     position,
     velocity,
     color = "red",
-    imageSrc,
     scale = 1,
     framesMax = 1,
     framesHold = 10,
@@ -97,13 +96,11 @@ class Fighter extends Sprite {
   }) {
     super({
       position,
-      imageSrc,
       scale,
       framesMax,
       framesHold,
       offset,
     });
-
     this.velocity = velocity;
     this.height = 150;
     this.width = 50;
@@ -126,11 +123,6 @@ class Fighter extends Sprite {
     this.framesElapsed = 0;
     this.sprites = sprites;
     this.dead = false;
-
-    for (const sprite in this.sprites) {
-      sprites[sprite].image = new Image();
-      sprites[sprite].image.src = sprites[sprite].imageSrc;
-    }
   }
 
   /**
@@ -363,6 +355,166 @@ class Fighter extends Sprite {
           this.framesCurrent = 0;
         }
         break;
+    }
+  }
+}
+
+class SamuraiMack extends Fighter {
+  constructor({ position, scale, framesMax, framesHold, offset, velocity }) {
+    super({
+      position,
+      scale,
+      framesMax,
+      framesHold,
+      offset,
+      velocity,
+    });
+    this.name = "Samurai Mack";
+    this.position = position;
+    this.velocity = velocity;
+    let sprites = {
+      idleRight: {
+        imageSrc: "./assets/samuraiMack/Idle Right.png",
+        framesMax: 8,
+      },
+      idleLeft: {
+        imageSrc: "./assets/samuraiMack/Idle Left.png",
+        framesMax: 8,
+      },
+      runRight: {
+        imageSrc: "./assets/samuraiMack/Run Right.png",
+        framesMax: 8,
+      },
+      runLeft: {
+        imageSrc: "./assets/samuraiMack/Run Left.png",
+        framesMax: 8,
+      },
+      jumpRight: {
+        imageSrc: "./assets/samuraiMack/Jump Right.png",
+        framesMax: 2,
+      },
+      jumpLeft: {
+        imageSrc: "./assets/samuraiMack/Jump Left.png",
+        framesMax: 2,
+      },
+      fallRight: {
+        imageSrc: "./assets/samuraiMack/Fall Right.png",
+        framesMax: 2,
+      },
+      fallLeft: {
+        imageSrc: "./assets/samuraiMack/Fall Left.png",
+        framesMax: 2,
+      },
+      attack1Right: {
+        imageSrc: "./assets/samuraiMack/Attack1 Right.png",
+        framesMax: 6,
+      },
+      attack1Left: {
+        imageSrc: "./assets/samuraiMack/Attack1 Left.png",
+        framesMax: 6,
+      },
+      takeHitRight: {
+        imageSrc: "./assets/samuraiMack/Take Hit Right.png",
+        framesMax: 4,
+      },
+      takeHitLeft: {
+        imageSrc: "./assets/samuraiMack/Take Hit Left.png",
+        framesMax: 4,
+      },
+      deathRight: {
+        imageSrc: "./assets/samuraiMack/Death Right.png",
+        framesMax: 6,
+      },
+      deathLeft: {
+        imageSrc: "./assets/samuraiMack/Death Left.png",
+        framesMax: 6,
+      },
+    };
+    this.sprites = sprites;
+    this.imageSrc = sprites.idleRight.imageSrc;
+    for (const sprite in this.sprites) {
+      sprites[sprite].image = new Image();
+      sprites[sprite].image.src = sprites[sprite].imageSrc;
+    }
+  }
+}
+
+class Kenji extends Fighter {
+  constructor({ position, scale, framesMax, framesHold, offset, velocity }) {
+    super({
+      position,
+      scale,
+      framesMax,
+      framesHold,
+      offset,
+      velocity,
+    });
+    this.name = "Kenji";
+    this.position = position;
+    this.velocity = velocity;
+    let sprites = {
+      idleRight: {
+        imageSrc: "./assets/kenji/Idle Right.png",
+        framesMax: 4,
+      },
+      idleLeft: {
+        imageSrc: "./assets/kenji/Idle Left.png",
+        framesMax: 4,
+      },
+      runRight: {
+        imageSrc: "./assets/kenji/Run Right.png",
+        framesMax: 8,
+      },
+      runLeft: {
+        imageSrc: "./assets/kenji/Run Left.png",
+        framesMax: 8,
+      },
+      jumpRight: {
+        imageSrc: "./assets/kenji/Jump Right.png",
+        framesMax: 2,
+      },
+      jumpLeft: {
+        imageSrc: "./assets/kenji/Jump Left.png",
+        framesMax: 2,
+      },
+      fallRight: {
+        imageSrc: "./assets/kenji/Fall Right.png",
+        framesMax: 2,
+      },
+      fallLeft: {
+        imageSrc: "./assets/kenji/Fall Left.png",
+        framesMax: 2,
+      },
+      attack1Right: {
+        imageSrc: "./assets/kenji/Attack1 Right.png",
+        framesMax: 4,
+      },
+      attack1Left: {
+        imageSrc: "./assets/kenji/Attack1 Left.png",
+        framesMax: 4,
+      },
+      takeHitRight: {
+        imageSrc: "./assets/kenji/Take Hit Right.png",
+        framesMax: 3,
+      },
+      takeHitLeft: {
+        imageSrc: "./assets/kenji/Take Hit Left.png",
+        framesMax: 3,
+      },
+      deathRight: {
+        imageSrc: "./assets/kenji/Death Right.png",
+        framesMax: 7,
+      },
+      deathLeft: {
+        imageSrc: "./assets/kenji/Death Left.png",
+        framesMax: 7,
+      },
+    };
+    this.sprites = sprites;
+    this.imageSrc = sprites.idleLeft.imageSrc;
+    for (const sprite in this.sprites) {
+      sprites[sprite].image = new Image();
+      sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
   }
 }
