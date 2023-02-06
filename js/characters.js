@@ -2,7 +2,7 @@
 const player = new Fighter({
   position: {
     x: 0,
-    y: 0,
+    y: 330,
   },
   velocity: {
     x: 0,
@@ -13,8 +13,6 @@ const player = new Fighter({
     y: 0,
   },
   imageSrc: "./assets/samuraiMack/idle Right.png",
-  framesHold: 10,
-  framesMax: 8,
   scale: 2.5,
   offset: {
     x: 215,
@@ -92,10 +90,12 @@ const player = new Fighter({
   },
 });
 
+console.log(player);
+
 const enemy = new Fighter({
   position: {
     x: 900,
-    y: 100,
+    y: 330,
   },
   velocity: {
     x: 0,
@@ -106,10 +106,7 @@ const enemy = new Fighter({
     y: 0,
   },
   lastKey: "ArrowLeft",
-  color: "blue",
   imageSrc: "./assets/kenji/Idle Left.png",
-  framesHold: 10,
-  framesMax: 4,
   scale: 2.5,
   offset: {
     x: 215,
