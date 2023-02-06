@@ -360,7 +360,15 @@ class Fighter extends Sprite {
 }
 
 class SamuraiMack extends Fighter {
-  constructor({ position, scale, framesMax, framesHold, offset, velocity }) {
+  constructor({
+    position,
+    scale,
+    framesMax,
+    framesHold,
+    offset,
+    velocity,
+    attackBox,
+  }) {
     super({
       position,
       scale,
@@ -368,10 +376,12 @@ class SamuraiMack extends Fighter {
       framesHold,
       offset,
       velocity,
+      attackBox,
     });
     this.name = "Samurai Mack";
     this.position = position;
     this.velocity = velocity;
+    this.attackBox = attackBox;
     let sprites = {
       idleRight: {
         imageSrc: "./assets/samuraiMack/Idle Right.png",
