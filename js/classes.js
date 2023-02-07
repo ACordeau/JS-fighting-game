@@ -8,7 +8,7 @@ class Sprite {
    */
   constructor({
     position,
-    imageSrc,
+    imageSrc = "",
     scale = 1,
     framesMax = 1,
     framesHold = 10,
@@ -368,6 +368,7 @@ class SamuraiMack extends Fighter {
     offset,
     velocity,
     attackBox,
+    lastKey,
   }) {
     super({
       position,
@@ -381,7 +382,16 @@ class SamuraiMack extends Fighter {
     this.name = "Samurai Mack";
     this.position = position;
     this.velocity = velocity;
-    this.attackBox = attackBox;
+    this.attackBox = {
+      position: {
+        x: this.position.x,
+        y: this.position.y,
+      },
+      offsetRight: attackBox.offsetRight,
+      offsetLeft: attackBox.offsetLeft,
+      width: attackBox.width,
+      height: attackBox.height,
+    };
     let sprites = {
       idleRight: {
         imageSrc: "./assets/samuraiMack/Idle Right.png",
@@ -441,16 +451,25 @@ class SamuraiMack extends Fighter {
       },
     };
     this.sprites = sprites;
-    this.imageSrc = sprites.idleRight.imageSrc;
     for (const sprite in this.sprites) {
       sprites[sprite].image = new Image();
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
+    this.lastKey = lastKey;
   }
 }
 
 class Kenji extends Fighter {
-  constructor({ position, scale, framesMax, framesHold, offset, velocity }) {
+  constructor({
+    position,
+    scale,
+    framesMax,
+    framesHold,
+    offset,
+    velocity,
+    attackBox,
+    lastKey,
+  }) {
     super({
       position,
       scale,
@@ -458,10 +477,21 @@ class Kenji extends Fighter {
       framesHold,
       offset,
       velocity,
+      attackBox,
     });
     this.name = "Kenji";
     this.position = position;
     this.velocity = velocity;
+    this.attackBox = {
+      position: {
+        x: this.position.x,
+        y: this.position.y,
+      },
+      offsetRight: attackBox.offsetRight,
+      offsetLeft: attackBox.offsetLeft,
+      width: attackBox.width,
+      height: attackBox.height,
+    };
     let sprites = {
       idleRight: {
         imageSrc: "./assets/kenji/Idle Right.png",
@@ -521,10 +551,10 @@ class Kenji extends Fighter {
       },
     };
     this.sprites = sprites;
-    this.imageSrc = sprites.idleLeft.imageSrc;
     for (const sprite in this.sprites) {
       sprites[sprite].image = new Image();
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
+    this.lastKey = lastKey;
   }
 }

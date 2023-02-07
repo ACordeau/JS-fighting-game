@@ -8,6 +8,7 @@ const player = new SamuraiMack({
     x: 0,
     y: 0,
   },
+  lastKey: "ArrowRight",
   scale: 2.5,
   offset: {
     x: 215,
