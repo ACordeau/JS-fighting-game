@@ -1,5 +1,8 @@
+const factory = new CharacterFactory();
+
 // Player and Enemy instantiation
-const player = new SamuraiMack({
+const playerInformation = {
+  character: "SamuraiMack",
   position: {
     x: 0,
     y: 330,
@@ -26,11 +29,14 @@ const player = new SamuraiMack({
     width: 150,
     height: 50,
   },
-});
+};
+
+const player = factory.createCharacter(playerInformation);
 
 console.log(player);
 
-const enemy = new Kenji({
+const enemyInformation = {
+  character: "Kenji",
   position: {
     x: 900,
     y: 330,
@@ -61,6 +67,7 @@ const enemy = new Kenji({
     width: 171,
     height: 50,
   },
-});
+};
 
+const enemy = factory.createCharacter(enemyInformation);
 console.log(enemy);
