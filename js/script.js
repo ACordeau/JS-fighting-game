@@ -1,20 +1,31 @@
 // TODO ADD CONTROLLER SUPPORT
-// TODO Tweak Movement
-// DONE FIX LEAVING EDGE OF SCREEN
-// DONE FIX INIFINITE JUMPING
-// TODO ADD DOUBLE JUMP
-// TODO ADD BLOCKING
+// TODO TWEAK MOVEMENT
+// TODO ADD DOUBLE JUMP - SamuraiMack
+// TODO ADD PROJECTILE - Kenji
 // TODO ADD MORE THAN ONE ATTACK
-// TODO ADD CROUCH - NO CROUCHING SPRITES ;n;
-// DONE FLIP SPRITES
-// DONE FLIP ATTACK BOX
-// IN PROGRESS ALLOW PLAYERS TO JUMP ON SHOP
+// TODO ALLOW PLAYERS TO JUMP ON SHOP
 // TODO REFACTOR
 // TODO COMMENT EVERYTHING
-// TODO ADD HOME PAGE
-// TODO ADD CHARACTER SELECT
 // TODO ABSTRACT FRAMES HOLD FROM SPRITES
 // TODO STOP CHARACTERS FROM ACTING DURING DEATH ANIMATION
+// TODO ADD NEW CHARACTER
+// TODO GAME BALANCE
+// TODO ABSTRACT CONTROLS
+// TODO ADD END GAME SCREEN
+
+// DONE MAKE CHARACTER SELECT CHOOSE CHARACTERS
+// DONE TWEAK CHARACTER STARTING POSITIONS
+// DONE FIX DEATH ANIMATION BREAKING WHEN FACING OPPOSITE STARTING DIRECTION
+// DONE FIX SPRITES BEING FLIPPED BUT NOT INVERTED
+// DONE ABSTRACT FRAMES TO HIT
+// DONE ABSTRACT CHARACTERS
+// DONE FLIP SPRITES
+// DONE FLIP ATTACK BOX
+// DONE FIX LEAVING EDGE OF SCREEN
+// DONE FIX INIFINITE JUMPING
+// DONE ADD HOME PAGE
+// DONE ADD CHARACTER SELECT
+// DONE SAVE CHARACTER SELECT CHOICES IN SESSION STORAGE
 
 // Select the canvas and window context
 const canvas = document.querySelector("canvas");
@@ -80,6 +91,7 @@ function animate() {
 
   background.update();
   shop.update();
+
   context.fillStyle = "rgba(255, 255, 255, 0.1)";
   context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -148,7 +160,7 @@ function animate() {
   if (
     rectangularCollision({ rectangle1: player, rectangle2: enemy }) &&
     player.isAttacking &&
-    player.framesCurrent === 4
+    player.framesCurrent === player.hitFrame
   ) {
     player.isAttacking = false;
     enemy.takeHit();
@@ -158,7 +170,7 @@ function animate() {
   }
 
   // if player misses
-  if (player.isAttacking && player.framesCurrent === 4) {
+  if (player.isAttacking && player.framesCurrent === player.hitFrame) {
     player.isAttacking = false;
   }
 
@@ -166,7 +178,7 @@ function animate() {
   if (
     rectangularCollision({ rectangle1: enemy, rectangle2: player }) &&
     enemy.isAttacking &&
-    enemy.framesCurrent === 1
+    enemy.framesCurrent === enemy.hitFrame
   ) {
     enemy.isAttacking = false;
     player.takeHit();
@@ -176,7 +188,7 @@ function animate() {
   }
 
   // if enemy misses
-  if (enemy.isAttacking && enemy.framesCurrent === 2) {
+  if (enemy.isAttacking && enemy.framesCurrent === enemy.hitFrame) {
     enemy.isAttacking = false;
   }
 
@@ -187,7 +199,7 @@ function animate() {
 }
 
 animate();
-decreaseTimer();
+// decreaseTimer();
 
 window.addEventListener("keydown", (event) => {
   if (!player.dead) {

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      style="
+        width: 1024px;
+        height: 576px;
+        background-color: black;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        column-gap: 100px;
+      "
+    >
+      <p style="position: absolute; color: white; top: 100px">
+        Choose your character Player 2
+      </p>
+      <a href="game.html">
+        <img
+          id="samuraiMack"
+          src="/assets/samuraiMack/SamuraiMackStill.png"
+          width="50"
+          height="100"
+          onclick="sessionStorage.setItem('player2', 'SamuraiMack')"
+        />
+      </a>
+      <a href="game.html">
+        <img
+          id="kenji"
+          src="/assets/kenji/KenjiStill.png"
+          width="50"
+          height="100"
+          onclick="sessionStorage.setItem('player2', 'Kenji')"
+        />
+      </a>
+    </div>
+  </body>
+</html>
