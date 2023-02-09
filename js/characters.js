@@ -2,7 +2,8 @@ const factory = new CharacterFactory();
 
 // Player and Enemy instantiation
 const playerInformation = {
-  character: "SamuraiMack",
+  player: "player1",
+  character: sessionStorage.getItem("player1"),
   position: {
     x: 0,
     y: 330,
@@ -13,10 +14,6 @@ const playerInformation = {
   },
   lastKey: "ArrowRight",
   scale: 2.5,
-  offset: {
-    x: 215,
-    y: 157,
-  },
   attackBox: {
     offsetRight: {
       x: 100,
@@ -36,25 +33,18 @@ const player = factory.createCharacter(playerInformation);
 console.log(player);
 
 const enemyInformation = {
-  character: "Kenji",
+  player: "player2",
+  character: sessionStorage.getItem("player2"),
   position: {
-    x: 900,
+    x: 960,
     y: 330,
   },
   velocity: {
     x: 0,
     y: 0,
   },
-  offset: {
-    x: -50,
-    y: 0,
-  },
   lastKey: "ArrowLeft",
   scale: 2.5,
-  offset: {
-    x: 215,
-    y: 167,
-  },
   attackBox: {
     offsetLeft: {
       x: -171,

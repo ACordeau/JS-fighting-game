@@ -116,6 +116,9 @@ class Fighter extends Sprite {
       width: attackBox.width,
       height: attackBox.height,
     };
+    console.log("General");
+    console.log(this.attackBox);
+
     this.isAttacking;
     this.isJumping;
     this.health = 100;
@@ -151,13 +154,15 @@ class Fighter extends Sprite {
     }
 
     // Draw attack box
-    // context.fillStyle = "Black";
-    // context.fillRect(
-    //   this.attackBox.position.x,
-    //   this.attackBox.position.y,
-    //   this.attackBox.width,
-    //   this.attackBox.height
-    // );
+    // if (this.name === "Samurai Mack") {
+    context.fillStyle = "Black";
+    context.fillRect(
+      this.attackBox.position.x,
+      this.attackBox.position.y,
+      this.attackBox.width,
+      this.attackBox.height
+    );
+    // }
 
     // Updates the y position
     this.position.x += this.velocity.x;
@@ -382,16 +387,17 @@ class SamuraiMack extends Fighter {
     this.name = "Samurai Mack";
     this.position = position;
     this.velocity = velocity;
-    this.attackBox = {
-      position: {
-        x: this.position.x,
-        y: this.position.y,
-      },
-      offsetRight: attackBox.offsetRight,
-      offsetLeft: attackBox.offsetLeft,
-      width: attackBox.width,
-      height: attackBox.height,
-    };
+    // this.attackBox = {
+    //   position: {
+    //     x: this.position.x,
+    //     y: this.position.y,
+    //   },
+    //   offsetRight: attackBox.offsetRight,
+    //   offsetLeft: attackBox.offsetLeft,
+    //   width: attackBox.width,
+    //   height: attackBox.height,
+    // };
+
     let sprites = {
       idleRight: {
         imageSrc: "./assets/samuraiMack/Idle Right.png",
@@ -456,6 +462,7 @@ class SamuraiMack extends Fighter {
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
     this.lastKey = lastKey;
+    this.hitFrame = 4;
   }
 }
 
@@ -556,5 +563,6 @@ class Kenji extends Fighter {
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
     this.lastKey = lastKey;
+    this.hitFrame = 1;
   }
 }

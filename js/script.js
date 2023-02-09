@@ -9,6 +9,11 @@
 // TODO ABSTRACT FRAMES HOLD FROM SPRITES
 // TODO STOP CHARACTERS FROM ACTING DURING DEATH ANIMATION
 // TODO MAKE CHARACTER SELECT CHOOSE CHARACTERS
+// TODO TWEAK CHARACTER STARTING POSITIONS
+
+// DONE FIX DEATH ANIMATION BREAKING WHEN FACING OPPOSITE STARTING DIRECTION
+// DONE FIX SPRITES BEING FLIPPED BUT NOT INVERTED
+// DONE ABSTRACT FRAMES TO HIT
 // DONE ABSTRACT CHARACTERS
 // DONE FLIP SPRITES
 // DONE FLIP ATTACK BOX
@@ -151,7 +156,7 @@ function animate() {
   if (
     rectangularCollision({ rectangle1: player, rectangle2: enemy }) &&
     player.isAttacking &&
-    player.framesCurrent === 4
+    player.framesCurrent === player.hitFrame
   ) {
     player.isAttacking = false;
     enemy.takeHit();
@@ -161,7 +166,7 @@ function animate() {
   }
 
   // if player misses
-  if (player.isAttacking && player.framesCurrent === 4) {
+  if (player.isAttacking && player.framesCurrent === player.hitFrame) {
     player.isAttacking = false;
   }
 
@@ -169,7 +174,7 @@ function animate() {
   if (
     rectangularCollision({ rectangle1: enemy, rectangle2: player }) &&
     enemy.isAttacking &&
-    enemy.framesCurrent === 1
+    enemy.framesCurrent === enemy.hitFrame
   ) {
     enemy.isAttacking = false;
     player.takeHit();
@@ -179,7 +184,7 @@ function animate() {
   }
 
   // if enemy misses
-  if (enemy.isAttacking && enemy.framesCurrent === 2) {
+  if (enemy.isAttacking && enemy.framesCurrent === enemy.hitFrame) {
     enemy.isAttacking = false;
   }
 

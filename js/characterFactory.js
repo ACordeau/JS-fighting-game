@@ -6,7 +6,10 @@ class CharacterFactory {
         velocity: attributes.velocity,
         lastKey: attributes.lastKey,
         scale: attributes.scale,
-        offset: attributes.offset,
+        offset: {
+          x: 215,
+          y: 167,
+        },
         attackBox: attributes.attackBox,
       });
     } else if (attributes.character === "SamuraiMack") {
@@ -15,7 +18,10 @@ class CharacterFactory {
         velocity: attributes.velocity,
         lastKey: attributes.lastKey,
         scale: attributes.scale,
-        offset: attributes.offset,
+        offset: {
+          x: 215,
+          y: 157,
+        },
         attackBox: attributes.attackBox,
       });
     }
