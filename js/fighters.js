@@ -22,7 +22,10 @@ class Fighter {
       height: undefined,
     },
     lastKey,
+    controls,
+    player,
   }) {
+    this.player = player;
     this.position = position;
     this.height = 150;
     this.width = 50;
@@ -34,6 +37,9 @@ class Fighter {
     this.framesElapsed = 0;
     this.framesHold = framesHold;
     this.offset = offset;
+
+    this.controls = controls;
+    this.input = new InputHandler(this.controls, this.player);
 
     this.velocity = velocity;
     this.lastKey = lastKey;
@@ -78,6 +84,9 @@ class Fighter {
    */
   update() {
     this.draw();
+
+    // console.log(this.name);
+    // console.log(this.image);
 
     if (!this.dead) {
       this.animateFrames();
@@ -331,6 +340,8 @@ class SamuraiMack extends Fighter {
     velocity,
     attackBox,
     lastKey,
+    controls,
+    player,
   }) {
     super({
       position,
@@ -340,20 +351,12 @@ class SamuraiMack extends Fighter {
       offset,
       velocity,
       attackBox,
+      player,
+      controls,
     });
     this.name = "Samurai Mack";
     this.position = position;
     this.velocity = velocity;
-    // this.attackBox = {
-    //   position: {
-    //     x: this.position.x,
-    //     y: this.position.y,
-    //   },
-    //   offsetRight: attackBox.offsetRight,
-    //   offsetLeft: attackBox.offsetLeft,
-    //   width: attackBox.width,
-    //   height: attackBox.height,
-    // };
 
     let sprites = {
       idleRight: {
@@ -433,6 +436,8 @@ class Kenji extends Fighter {
     velocity,
     attackBox,
     lastKey,
+    controls,
+    player,
   }) {
     super({
       position,
@@ -442,10 +447,13 @@ class Kenji extends Fighter {
       offset,
       velocity,
       attackBox,
+      player,
+      controls,
     });
     this.name = "Kenji";
     this.position = position;
     this.velocity = velocity;
+
     this.attackBox = {
       position: {
         x: this.position.x,

@@ -102,18 +102,23 @@ function animate() {
   enemy.velocity.x = 0;
 
   // Player movement
-  if (keys.a.pressed && player.lastKey === "a" && player.position.x >= 0) {
+
+  if (
+    player.input.keys.includes(player.input.controls.left) &&
+    player.input.lastKey === player.input.controls.left &&
+    player.position.x >= 0
+  ) {
     player.velocity.x = -5;
     player.switchSprite("runLeft");
   } else if (
-    keys.d.pressed &&
-    player.lastKey === "d" &&
+    player.input.keys.includes(player.input.controls.right) &&
+    player.input.lastKey === player.input.controls.right &&
     player.position.x + player.width <= canvas.width
   ) {
     player.velocity.x = 5;
     player.switchSprite("runRight");
   } else {
-    if (player.lastKey === "a") {
+    if (player.input.lastKey === player.input.controls.left) {
       player.switchSprite("idleLeft");
     } else {
       player.switchSprite("idleRight");
@@ -128,21 +133,21 @@ function animate() {
 
   // Enemy movement
   if (
-    keys.ArrowLeft.pressed &&
-    enemy.lastKey === "ArrowLeft" &&
+    enemy.input.keys.includes(enemy.input.controls.left) &&
+    enemy.input.lastKey === enemy.input.controls.left &&
     enemy.position.x >= 0
   ) {
     enemy.velocity.x = -5;
     enemy.switchSprite("runLeft");
   } else if (
-    keys.ArrowRight.pressed &&
-    enemy.lastKey === "ArrowRight" &&
+    enemy.input.keys.includes(enemy.input.controls.right) &&
+    enemy.input.lastKey === enemy.input.controls.right &&
     enemy.position.x + enemy.width <= canvas.width
   ) {
     enemy.switchSprite("runRight");
     enemy.velocity.x = 5;
   } else {
-    if (enemy.lastKey === "ArrowLeft") {
+    if (enemy.input.lastKey === enemy.input.controls.left) {
       enemy.switchSprite("idleLeft");
     } else {
       enemy.switchSprite("idleRight");
@@ -196,6 +201,8 @@ function animate() {
   if (enemy.health <= 0 || player.health <= 0) {
     determineWinner();
   }
+
+  // console.log(enemy.lastKey);
 }
 
 animate();

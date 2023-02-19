@@ -12,7 +12,7 @@ const playerInformation = {
     x: 0,
     y: 0,
   },
-  lastKey: "ArrowRight",
+  lastKey: "d",
   scale: 2.5,
   attackBox: {
     offsetRight: {
@@ -25,6 +25,13 @@ const playerInformation = {
     },
     width: 150,
     height: 50,
+  },
+  controls: {
+    left: "a",
+    right: "d",
+    jump: "w",
+    down: "s",
+    attack: " ",
   },
 };
 
@@ -55,6 +62,13 @@ const enemyInformation = {
     },
     width: 171,
     height: 50,
+  },
+  controls: {
+    left: "ArrowLeft",
+    right: "ArrowRight",
+    jump: "ArrowUp",
+    down: "ArrowDown",
+    attack: "Control",
   },
 };
 
