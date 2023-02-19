@@ -29,7 +29,6 @@ const playerInformation = {
 };
 
 const player = factory.createCharacter(playerInformation);
-
 console.log(player);
 
 const enemyInformation = {
