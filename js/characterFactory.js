@@ -5,7 +5,6 @@ class CharacterFactory {
         player: attributes.player,
         position: attributes.position,
         velocity: attributes.velocity,
-        lastKey: attributes.lastKey,
         scale: attributes.scale,
         offset: {
           x: 215,
@@ -19,7 +18,6 @@ class CharacterFactory {
         player: attributes.player,
         position: attributes.position,
         velocity: attributes.velocity,
-        lastKey: attributes.lastKey,
         scale: attributes.scale,
         offset: {
           x: 215,

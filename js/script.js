@@ -64,22 +64,6 @@ const shop = new Sprite({
   framesHold: 30,
 });
 
-// Object containing pressed values of keys
-const keys = {
-  a: {
-    pressed: false,
-  },
-  d: {
-    pressed: false,
-  },
-  ArrowRight: {
-    pressed: false,
-  },
-  ArrowLeft: {
-    pressed: false,
-  },
-};
-
 /**
  * Animate loop
  */
@@ -125,10 +109,24 @@ function animate() {
     }
   }
 
+  // Player jumping
+
+  if (player.input.keys.includes(player.input.controls.jump)) {
+    if (!player.isJumping) {
+      player.velocity.y = -20;
+    }
+  }
+
   if (player.velocity.y != 0) {
     player.jump();
   } else {
     player.isJumping = false;
+  }
+
+  // Player attack
+
+  if (player.input.keys.includes(player.input.controls.attack)) {
+    player.attack();
   }
 
   // Enemy movement
@@ -155,10 +153,20 @@ function animate() {
   }
 
   // Jumping
+  if (enemy.input.keys.includes(enemy.input.controls.jump)) {
+    if (!enemy.isJumping) {
+      enemy.velocity.y = -20;
+    }
+  }
+
   if (enemy.velocity.y != 0) {
     enemy.jump();
   } else {
     enemy.isJumping = false;
+  }
+
+  if (enemy.input.keys.includes(enemy.input.controls.attack)) {
+    enemy.attack();
   }
 
   // detect for collision Player to Enemy
@@ -201,75 +209,7 @@ function animate() {
   if (enemy.health <= 0 || player.health <= 0) {
     determineWinner();
   }
-
-  // console.log(enemy.lastKey);
 }
 
 animate();
 // decreaseTimer();
-
-window.addEventListener("keydown", (event) => {
-  if (!player.dead) {
-    switch (event.key) {
-      // Player Keyboard controls
-      case "d":
-        keys.d.pressed = true;
-        player.lastKey = "d";
-        break;
-      case "a":
-        keys.a.pressed = true;
-        player.lastKey = "a";
-        break;
-      case "w":
-        if (!player.isJumping) {
-          player.velocity.y = -20;
-        }
-        break;
-      case " ":
-        player.attack();
-        break;
-    }
-  }
-
-  if (!enemy.dead) {
-    switch (event.key) {
-      // Enemy Keyboard controls
-      case "ArrowRight":
-        keys.ArrowRight.pressed = true;
-        enemy.lastKey = "ArrowRight";
-        break;
-      case "ArrowLeft":
-        keys.ArrowLeft.pressed = true;
-        enemy.lastKey = "ArrowLeft";
-        break;
-      case "ArrowUp":
-        if (!enemy.isJumping) {
-          enemy.velocity.y = -20;
-        }
-        break;
-      case "Control":
-        enemy.attack();
-        break;
-    }
-  }
-});
-
-window.addEventListener("keyup", (event) => {
-  switch (event.key) {
-    // Player key unpress
-    case "d":
-      keys.d.pressed = false;
-      break;
-    case "a":
-      keys.a.pressed = false;
-      break;
-
-    // Enemy key unpress
-    case "ArrowRight":
-      keys.ArrowRight.pressed = false;
-      break;
-    case "ArrowLeft":
-      keys.ArrowLeft.pressed = false;
-      break;
-  }
-});

@@ -1,26 +1,30 @@
 class InputHandler {
-  constructor(controls, player) {
+  constructor(character) {
     // constructor(game) {
     // this.game = game;
-    this.controls = controls;
+    this.character = character;
+    this.controls = character.controls;
     this.keys = [];
-    this.lastKey = player === "player1" ? "d" : "ArrowLeft";
+    this.lastKey = character.player === "player1" ? "d" : "ArrowLeft";
 
     window.addEventListener("keydown", (e) => {
-      if (
-        (e.key === this.controls.left ||
-          e.key === this.controls.right ||
-          e.key === this.controls.jump ||
-          e.key === this.controls.down ||
-          e.key === this.controls.attack) &&
-        this.keys.indexOf(e.key) === -1
-      ) {
-        this.keys.push(e.key);
-        if (e.key === controls.left || e.key === controls.right) {
-          this.lastKey = e.key;
+      if (!this.character.dead) {
+        if (
+          (e.key === this.controls.left ||
+            e.key === this.controls.right ||
+            e.key === this.controls.jump ||
+            e.key === this.controls.down ||
+            e.key === this.controls.attack) &&
+          this.keys.indexOf(e.key) === -1
+        ) {
+          this.keys.push(e.key);
+
+          if (e.key === this.controls.left || e.key === this.controls.right) {
+            this.lastKey = e.key;
+          }
+        } else if (e.key === "d") {
+          // this.game.debug = !this.game.debug;
         }
-      } else if (e.key === "d") {
-        // this.game.debug = !this.game.debug;
       }
     });
 

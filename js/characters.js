@@ -12,7 +12,6 @@ const playerInformation = {
     x: 0,
     y: 0,
   },
-  lastKey: "d",
   scale: 2.5,
   attackBox: {
     offsetRight: {
@@ -49,7 +48,6 @@ const enemyInformation = {
     x: 0,
     y: 0,
   },
-  lastKey: "ArrowLeft",
   scale: 2.5,
   attackBox: {
     offsetLeft: {

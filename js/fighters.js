@@ -21,7 +21,6 @@ class Fighter {
       width: undefined,
       height: undefined,
     },
-    lastKey,
     controls,
     player,
   }) {
@@ -39,10 +38,9 @@ class Fighter {
     this.offset = offset;
 
     this.controls = controls;
-    this.input = new InputHandler(this.controls, this.player);
+    this.input = new InputHandler(this);
 
     this.velocity = velocity;
-    this.lastKey = lastKey;
     this.attackBox = {
       position: {
         x: this.position.x,
@@ -85,16 +83,13 @@ class Fighter {
   update() {
     this.draw();
 
-    // console.log(this.name);
-    // console.log(this.image);
-
     if (!this.dead) {
       this.animateFrames();
     }
 
     // attack boxes
     if (!this.isAttacking) {
-      if (this.lastKey === "a" || this.lastKey === "ArrowLeft") {
+      if (this.input.lastKey === this.input.controls.left) {
         this.attackBox.position.x =
           this.position.x + this.attackBox.offsetLeft.x;
         this.attackBox.position.y =
@@ -151,13 +146,13 @@ class Fighter {
   jump() {
     this.isJumping = true;
     if (this.velocity.y < 0) {
-      if (this.lastKey === "a" || this.lastKey === "ArrowLeft") {
+      if (this.input.lastKey === this.input.controls.left) {
         this.switchSprite("jumpLeft");
       } else {
         this.switchSprite("jumpRight");
       }
     } else if (this.velocity.y > 0) {
-      if (this.lastKey === "a" || this.lastKey === "ArrowLeft") {
+      if (this.input.lastKey === this.input.controls.left) {
         this.switchSprite("fallLeft");
       } else {
         this.switchSprite("fallRight");
@@ -166,7 +161,7 @@ class Fighter {
   }
 
   attack() {
-    if (this.lastKey === "a" || this.lastKey === "ArrowLeft") {
+    if (this.input.lastKey === this.input.controls.left) {
       this.switchSprite("attack1Left");
     } else {
       this.switchSprite("attack1Right");
@@ -178,13 +173,13 @@ class Fighter {
     this.health -= 20;
 
     if (this.health <= 0) {
-      if (this.lastKey === "a" || this.lastKey === "ArrowLeft") {
+      if (this.input.lastKey === this.input.controls.left) {
         this.switchSprite("deathLeft");
       } else {
         this.switchSprite("deathRight");
       }
     } else {
-      if (this.lastKey === "a" || this.lastKey === "ArrowLeft") {
+      if (this.input.lastKey === this.input.controls.left) {
         this.switchSprite("takeHitLeft");
       } else {
         this.switchSprite("takeHitRight");
@@ -339,9 +334,9 @@ class SamuraiMack extends Fighter {
     offset,
     velocity,
     attackBox,
-    lastKey,
     controls,
     player,
+    input,
   }) {
     super({
       position,
@@ -353,6 +348,7 @@ class SamuraiMack extends Fighter {
       attackBox,
       player,
       controls,
+      input,
     });
     this.name = "Samurai Mack";
     this.position = position;
@@ -421,7 +417,6 @@ class SamuraiMack extends Fighter {
       sprites[sprite].image = new Image();
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
-    this.lastKey = lastKey;
     this.hitFrame = 4;
   }
 }
@@ -435,9 +430,9 @@ class Kenji extends Fighter {
     offset,
     velocity,
     attackBox,
-    lastKey,
     controls,
     player,
+    input,
   }) {
     super({
       position,
@@ -449,6 +444,7 @@ class Kenji extends Fighter {
       attackBox,
       player,
       controls,
+      input,
     });
     this.name = "Kenji";
     this.position = position;
@@ -527,7 +523,6 @@ class Kenji extends Fighter {
       sprites[sprite].image = new Image();
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
-    this.lastKey = lastKey;
     this.hitFrame = 1;
   }
 }
